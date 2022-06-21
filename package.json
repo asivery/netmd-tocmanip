@@ -1,6 +1,6 @@
 {
   "name": "netmd-tocmanip",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A library that lets you parse and edit Minidiscs' table of contents with ease",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,12 @@
   },
   "author": "asivery",
   "license": "GPL-2.0",
-  "keywords": ["NetMD", "Minidisc", "Table Of Contents", "ToC"],
+  "keywords": [
+    "NetMD",
+    "Minidisc",
+    "Table Of Contents",
+    "ToC"
+  ],
   "devDependencies": {
     "prettier": "^2.7.1",
     "ts-node": "^10.7.0"
