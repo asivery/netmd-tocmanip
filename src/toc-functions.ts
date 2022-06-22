@@ -2,10 +2,11 @@ import SIGNATURES from './signatures';
 import { Fragment, ModeFlag, Timestamp, ToC } from './toc';
 import { assert } from './utils';
 
-export function getTitleByCellIndex(toc: ToC, index: number): string {
-    assert(index >= 0 && index < 257);
+export function getTitleByCellIndex(toc: ToC, index: number, _depth: number = 0): string {
+    if(_depth > 10) return "...";
+    assert(index >= 0 && index < 256);
     let cell = toc.titleCellList[index];
-    return cell.title + (cell.link != 0 ? getTitleByCellIndex(toc, cell.link) : '');
+    return cell.title + (cell.link != 0 ? getTitleByCellIndex(toc, cell.link, _depth + 1) : '');
 }
 
 export function getTitleByTrackNumber(toc: ToC, index: number): string {
