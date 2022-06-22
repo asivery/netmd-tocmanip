@@ -143,7 +143,7 @@ export function reconstructTOC(toc: ToC, updateSignature: boolean = true): (Uint
     let output: (Uint8Array | null)[] = [];
 
     if (updateSignature) {
-        toc.deviceSignature = ownSignature;
+        toc = {...toc, deviceSignature: ownSignature};
     }
 
     let sectorIndex = 0;
