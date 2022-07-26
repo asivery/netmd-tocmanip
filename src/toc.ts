@@ -21,6 +21,17 @@ export function createDiscAddress(bytes: Uint8Array | number[]): DiscAddress {
     };
 }
 
+export function discAddressToLogical(address: DiscAddress){
+    return address.sector + (address.cluster * 32) ;
+}
+
+export function logicalToDiscAddress(logical: number){
+    const cluster = Math.floor(logical / 32);
+    const sector = logical % 32;
+    const group = 0;
+    return { cluster, sector, group };
+}
+
 export function discAddressToBytes(addr: DiscAddress): Uint8Array {
     return new Uint8Array([
         addr.cluster >> 6,
