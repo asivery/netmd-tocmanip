@@ -25,36 +25,36 @@ export function isValidFragment(fragment: Fragment): boolean {
 }
 
 export type CombinedTrackInfo = {
-    timestamp: Timestamp;
+    timestamp: Timestamp | null;
     ranges: Fragment[];
-    title: string;
-    writtenBy: string | 'UNKNOWN';
+    title: string | null;
+    writtenBy: string | 'UNKNOWN' | null;
 };
 
 export function getTrackInfo(toc: ToC, index: number): CombinedTrackInfo {
-    let title = getTitleByTrackNumber(toc, index);
-    let timestamp = toc.timestampList[toc.timestampMap[index]];
+    let title = toc.sectorsGiven.includes(1) ? getTitleByTrackNumber(toc, index) : null;
+    let timestamp = toc.sectorsGiven.includes(2) ? toc.timestampList[toc.timestampMap[index]] : null;
     let ranges = [];
 
-    let fragment: any = toc.trackFragmentList[toc.trackMap[index]];
+    let fragment: Fragment = toc.trackFragmentList[toc.trackMap[index]];
     do {
         ranges.push(fragment);
-    } while ((fragment = fragment.link && toc.trackFragmentList[fragment.link]));
+    } while (fragment.link !== 0 && (fragment = toc.trackFragmentList[fragment.link]));
 
     return {
         title,
         timestamp,
         ranges,
-        writtenBy: SIGNATURES[timestamp.signature] || 'UNKNOWN',
+        writtenBy: timestamp === null ? null : (SIGNATURES[timestamp.signature] || 'UNKNOWN'),
     };
 }
 
 export function updateFlagAllFragmentsOfTrack(toc: ToC, index: number, flag: ModeFlag, set: boolean) {
-    let fragment: any = toc.trackFragmentList[toc.trackMap[index]];
+    let fragment: Fragment = toc.trackFragmentList[toc.trackMap[index]];
     do {
-        if (set) fragment.setMode(flag);
-        else fragment.unsetMode(flag);
-    } while ((fragment = fragment.link && toc.trackFragmentList[fragment.link]));
+        if (set) fragment.mode |= flag;
+        else fragment.mode &= ~flag;
+    } while (fragment.link !== 0 && (fragment = toc.trackFragmentList[fragment.link]));
 }
 
 export function swapTrack(toc: ToC, trackA: number, trackB: number) {
