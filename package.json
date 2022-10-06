@@ -6,6 +6,13 @@
   "scripts": {
     "build": "tsc"
   },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asivery/netmd-tocmanip.git"
+  },
   "author": "asivery",
   "license": "GPL-2.0",
   "keywords": [
