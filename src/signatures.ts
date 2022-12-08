@@ -26,6 +26,7 @@ const SIGNATURES: { [key: number]: string } = {
     0xA23: 'Sharp MD-F250',
     0xA26: 'Tascam MD-CDmkIII', // (With a sharp drive)
     0xD0A: 'Aiwa AM-F70',
+    
     [ownSignature]: 'TOCManip',
 };
 
