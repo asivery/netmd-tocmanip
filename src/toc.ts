@@ -2,11 +2,11 @@ import { ownSignature } from './signatures';
 import { assert } from './utils';
 
 export enum ModeFlag {
-    F_FREEMAP = 0x1,
+    F_EMPHASIS = 0x1, // (https://patentimages.storage.googleapis.com/d9/17/e8/61e3363b4ce965/JP4333131B2.pdf)
     F_STEREO = 0x2,
     F_SP_MODE = 0x4,
-    F_UNKNOWN = 0x8,
-    F_AUDIO = 0x10,
+    F_CODECMODE_RESERVED = 0x8,
+    F_AUDIO = 0x10, // Negated - AUDIO = 0, RESERVED = 1
     F_SCMS_DIG_COPY = 0x20,
     F_SCMS_UNRESTRICTED = 0x40,
     F_WRITABLE = 0x80,
