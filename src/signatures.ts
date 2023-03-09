@@ -9,6 +9,7 @@ const SIGNATURES: { [key: number]: string } = {
     0x129: 'Sony MZ-R55',
     0x12B: 'Sony MZ-R90',
     0x12C: 'Sony MZ-R900 / MZ-R700',
+    0x13D: 'Sony LAM-Z03',
     0x144: 'Sony MDS-303',
     0x145: 'Sony MDS-503',
     0x146: 'Sony MDS-JE500/MDS-JE510',
@@ -16,7 +17,7 @@ const SIGNATURES: { [key: number]: string } = {
     0x14A: 'Sony MDS-JE520',
     0x14C: 'Sony MDS-W1',
     0x14D: 'Sony MDS-JB920/MDS-JB730/MDS-JE530/MDS-JE330/MDS-JE440',
-    0x154: 'Sony MDS-JB940',
+    0x154: 'Sony MDS-JB940/MDS-S50',
     0x157: 'Sony MDS-NT1',
     0x17E: 'Sony MDS-E10/MDS-E12',
 
