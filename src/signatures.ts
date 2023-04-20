@@ -19,6 +19,7 @@ const SIGNATURES: { [key: number]: string } = {
     0x14D: 'Sony MDS-JB920/MDS-JB730/MDS-JE530/MDS-JE330/MDS-JE440',
     0x154: 'Sony MDS-JB940/MDS-S50',
     0x157: 'Sony MDS-NT1',
+    0x159: 'Sony MDS-S500',
     0x17E: 'Sony MDS-E10/MDS-E12',
 
     0x305: 'Panasonic SJ-MR100',
