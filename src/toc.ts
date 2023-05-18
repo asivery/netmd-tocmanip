@@ -65,7 +65,7 @@ export interface Fragment {
 }
 
 export interface TitleCell {
-    title: string;
+    title: Uint8Array;
     link: number;
 }
 
@@ -97,7 +97,7 @@ export function parseTOC(...sectors: (Uint8Array | null)[]) {
         link: byte(),
     });
     const titleCell = () => ({
-        title: [...multiple(7)].map((n) => String.fromCharCode(n)).join(''),
+        title: multiple(7),
         link: byte(),
     });
     const timestamp = () => ({
@@ -184,7 +184,7 @@ export function reconstructTOC(toc: ToC, updateSignature: boolean = true): (Uint
     };
     const titleCell = (n: TitleCell) => {
         assert(n.title.length === 7, 'Title cells must be exactly 7 characters long.');
-        multiple(new Uint8Array(Array.from(n.title).map((n) => n.charCodeAt(0))));
+        multiple(n.title);
         byte(n.link);
     };
     const timestamp = (n: Timestamp) => {
