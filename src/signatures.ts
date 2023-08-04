@@ -4,7 +4,7 @@ const SIGNATURES: { [key: number]: string } = {
     0x120: 'Sony MZ-N505/MZ-N707/MZ-N1',
     0x121: 'Sony MZ-N510/MZ-N520/MZ-NE410/MZ-N910/MZ-N920/MZ-N710/MZ-N10 / Aiwa AM-NX9',
     0x124: 'Sony MZ-R3 / Sony MZ-RH10',    // R3 From minidisc.org
-    0x122: 'Sony MZ-NH700/MZ-N900',
+    0x122: 'Sony MZ-NH1/MZ-NH700/MZ-NH900',
     0x125: 'Sony MZ-RH1',
     0x126: 'Sony MZ-R30',
     0x127: 'Sony MZ-R50',
