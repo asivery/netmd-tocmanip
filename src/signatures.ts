@@ -12,7 +12,7 @@ const SIGNATURES: { [key: number]: string } = {
     0x129: 'Sony MZ-R55',
     0x12B: 'Sony MZ-R90',
     0x12C: 'Sony MZ-R900/MZ-R700/MZ-R501',
-    0x12F: 'Sony MZ-R410/MZ-R909',
+    0x12F: 'Sony MZ-R410/MZ-R909/MZ-B100',
     0x136: 'Sony PMC-MD55',
     0x13D: 'Sony LAM-Z03',
     0x144: 'Sony MDS-303',
