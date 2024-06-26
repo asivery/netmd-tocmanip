@@ -2,11 +2,18 @@ import SIGNATURES from './signatures';
 import { Fragment, ModeFlag, Timestamp, ToC } from './toc';
 import { assert } from './utils';
 
+const textDecoder = new TextDecoder();
+
 export function getTitleByCellIndex(toc: ToC, index: number, _depth: number = 0): string {
     if(_depth > 10) return "...";
     assert(index >= 0 && index < 256);
     let cell = toc.titleCellList[index];
-    return cell.title + (cell.link != 0 ? getTitleByCellIndex(toc, cell.link, _depth + 1) : '');
+    let title = textDecoder.decode(cell.title);
+    const zeroIndex = title.indexOf("\0");
+    if(zeroIndex !== -1) {
+        title = title.substring(0, zeroIndex);
+    }
+    return title + (cell.link != 0 ? getTitleByCellIndex(toc, cell.link, _depth + 1) : '');
 }
 
 export function getTitleByTrackNumber(toc: ToC, index: number): string {

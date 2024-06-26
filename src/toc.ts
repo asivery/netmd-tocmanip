@@ -90,17 +90,17 @@ export function parseTOC(...sectors: (Uint8Array | null)[]) {
     const multiple = (n: number) => Array.from(rawBinary.slice(offset, (offset += n)));
     // ToC structures
     const discAddress = () => createDiscAddress(multiple(3));
-    const fragment = () => ({
+    const fragment: () => Fragment = () => ({
         start: discAddress(),
         mode: byte(),
         end: discAddress(),
         link: byte(),
     });
-    const titleCell = () => ({
-        title: multiple(7),
+    const titleCell: () => TitleCell = () => ({
+        title: new Uint8Array(multiple(7)),
         link: byte(),
     });
-    const timestamp = () => ({
+    const timestamp: () => Timestamp = () => ({
         year: byte(),
         month: byte(),
         day: byte(),

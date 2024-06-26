@@ -32,7 +32,7 @@ const SIGNATURES: { [key: number]: string } = {
     0x305: 'Panasonic SJ-MR100',
     0x307: 'Panasonic SJ-MR220',
     0x308: 'Panasonic SJ-MR250',
-    0x30A: 'Panasonic SJ-MR270'
+    0x30A: 'Panasonic SJ-MR270',
     
     // Sharp
     0xA11: 'Sharp MD-MS701',
