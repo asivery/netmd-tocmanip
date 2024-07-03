@@ -65,7 +65,7 @@ export interface Fragment {
 }
 
 export interface TitleCell {
-    title: Uint8Array;
+    title: number[];
     link: number;
 }
 
@@ -97,7 +97,7 @@ export function parseTOC(...sectors: (Uint8Array | null)[]) {
         link: byte(),
     });
     const titleCell: () => TitleCell = () => ({
-        title: new Uint8Array(multiple(7)),
+        title: Array.from(multiple(7)),
         link: byte(),
     });
     const timestamp: () => Timestamp = () => ({

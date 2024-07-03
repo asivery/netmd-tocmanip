@@ -8,7 +8,7 @@ export function getTitleByCellIndex(toc: ToC, index: number, _depth: number = 0)
     if(_depth > 10) return "...";
     assert(index >= 0 && index < 256);
     let cell = toc.titleCellList[index];
-    let title = textDecoder.decode(cell.title);
+    let title = textDecoder.decode(new Uint8Array(cell.title));
     const zeroIndex = title.indexOf("\0");
     if(zeroIndex !== -1) {
         title = title.substring(0, zeroIndex);
