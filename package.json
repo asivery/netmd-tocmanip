@@ -1,6 +1,6 @@
 {
   "name": "netmd-tocmanip",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A library that lets you parse and edit Minidiscs' table of contents with ease",
   "main": "dist/index.js",
   "scripts": {
