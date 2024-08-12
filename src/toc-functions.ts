@@ -1,4 +1,4 @@
-import SIGNATURES from './signatures';
+import { SIGNATURES } from './signatures';
 import { Fragment, ModeFlag, Timestamp, ToC } from './toc';
 import { assert } from './utils';
 
