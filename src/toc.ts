@@ -82,7 +82,7 @@ export interface Timestamp {
 export function parseTOC(...sectors: (Uint8Array | null)[]) {
     let rawBinary: Uint8Array;
 
-    let toc = {} as any;
+    let _toc = {} as any;
     // Core functions
     let offset = 0;
     const byte = () => rawBinary[offset++];
@@ -109,9 +109,10 @@ export function parseTOC(...sectors: (Uint8Array | null)[]) {
         second: byte(),
         signature: short(),
     });
+    const toc = _toc as ToC;
     toc.sectorsGiven = [];
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         if (!sectors[i]) continue;
         toc.sectorsGiven.push(i);
         rawBinary = sectors[i]!;
@@ -143,6 +144,12 @@ export function parseTOC(...sectors: (Uint8Array | null)[]) {
                 toc.timestampMap = Array(256).fill(0).map(byte);
                 toc.timestampList = Array(256).fill(0).map(timestamp);
                 break;
+            case 3:
+                toc.sec3padding = multiple(0x2f);
+
+                toc.nextFreeFullWidthTitleSlot = byte();
+                toc.fullWidthTitleMap = Array(256).fill(0).map(byte);
+                toc.fullWidthTitleCellList = Array(256).fill(0).map(titleCell);
         }
     }
 
@@ -226,6 +233,14 @@ export function reconstructTOC(toc: ToC, updateSignature: boolean = true): (Uint
     }
     nextSector();
 
+    if (hasSectorPresent()) {
+        multiple(toc.sec3padding);
+        byte(toc.nextFreeFullWidthTitleSlot);
+        multiple(new Uint8Array(toc.fullWidthTitleMap));
+        toc.fullWidthTitleCellList.forEach(titleCell);
+    }
+    nextSector();
+
     return output;
 }
 
@@ -236,6 +251,7 @@ export interface ToC {
     nextFreeTrackSlot: number;
     nextFreeTitleSlot: number;
     nextFreeTimestampSlot: number;
+    nextFreeFullWidthTitleSlot: number;
 
     trackMap: number[];
     trackFragmentList: Fragment[];
@@ -246,10 +262,14 @@ export interface ToC {
     timestampMap: number[];
     timestampList: Timestamp[];
 
+    fullWidthTitleMap: number[];
+    fullWidthTitleCellList: TitleCell[];
+
     sec0padding: number[]; // Unknown / Unchecked
     sec0apadding: number[]; // Unknown / Unchecked
     sec1padding: number[]; // Unknown / Unchecked
     sec2padding: number[]; // Unknown / Unchecked
+    sec3padding: number[]; // Unknown / Unchecked
 
     sectorsGiven: number[];
 }

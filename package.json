@@ -24,5 +24,8 @@
   "devDependencies": {
     "prettier": "^2.7.1",
     "ts-node": "^10.7.0"
+  },
+  "dependencies": {
+    "jconv": "github:asivery/jconv-webminidisc"
   }
 }
