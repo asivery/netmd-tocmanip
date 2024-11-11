@@ -15,14 +15,14 @@ function concatUint8Arrays(arrs: Uint8Array[]) {
     return newArray;
 }
 
-export function getTitleByCellIndex(toc: ToC, index: number, fullWidth: boolean = false): string {
+export function getTitleByCellIndex(toc: ToC, index: number, fullWidth: boolean = false, forceZeroFirst = false): string {
     let depth = 0;
     let cell = index;
     let cells: Uint8Array[] = [];
     assert(index >= 0 && index < 256);
 
 
-    while(cell != 0) {
+    while(cell != 0 || forceZeroFirst) {
         if(depth > 10) {
             cells.push(new TextEncoder().encode('...'));
             break;
@@ -31,6 +31,7 @@ export function getTitleByCellIndex(toc: ToC, index: number, fullWidth: boolean 
         cells.push(new Uint8Array(cellContents.title));
         cell = cellContents.link;
         depth += 1;
+        forceZeroFirst = false;
     }
     let flat = concatUint8Arrays(cells);
     const zeroIndex = flat.indexOf(0);
@@ -44,8 +45,8 @@ export function getTitleByCellIndex(toc: ToC, index: number, fullWidth: boolean 
     }
 }
 
-export function getTitleByTrackNumber(toc: ToC, index: number, fullWidth = false): string {
-    return getTitleByCellIndex(toc, fullWidth ? toc.fullWidthTitleMap[index] : toc.titleMap[index], fullWidth);
+export function getTitleByTrackNumber(toc: ToC, index: number, fullWidth = false, forceZeroFirst = false): string {
+    return getTitleByCellIndex(toc, fullWidth ? toc.fullWidthTitleMap[index] : toc.titleMap[index], fullWidth, forceZeroFirst);
 }
 
 export function isValidFragment(fragment: Fragment): boolean {
